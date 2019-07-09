@@ -1,14 +1,8 @@
-export const INCREMENT = 'INCREMENT'
-export const DECREMENT = 'DECREMENT'
+export const ADD_NUMBER = 'ADD_NUMBER'
 
-export const increment = () => {
+export const addNumber = (num) => {
   return {
-    type: INCREMENT,
-  }
-}
-
-export const decrement = () => {
-  return {
-    type: DECREMENT
+    type: ADD_NUMBER,
+    value: num
   }
 }

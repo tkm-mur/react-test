@@ -9,6 +9,9 @@
     "react-scripts": "3.0.1",
     "redux": "^4.0.1"
   },
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.8"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

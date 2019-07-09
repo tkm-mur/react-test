@@ -1,28 +1,57 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { increment, decrement } from '../actions' // action creator をインポート
+import { addNumber } from '../actions'
 
-const App = ({value, increment, decrement}) => {
-  return (
-    <div id="App">
-      <h1>Redux Test</h1>
-      <p>count: {value}</p>
-      <div>
-        <button onClick={ () => increment() }>INCREMENT</button>
-        <button onClick={ () => decrement() }>DECREMENT</button>
+class App extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      amount: 0
+    }
+  }
+
+  handleChange = (e) => {
+    const newValue = parseInt(e.currentTarget.value)
+    this.setState(() => {
+      return {
+        amount: newValue
+      }
+    })
+  }
+
+  handleSubmit = (e) => {
+    const { addNumber } = this.props
+    addNumber(this.state.amount)
+    e.preventDefault()
+  }
+
+  render () {
+    const { count: { value } } = this.props
+
+    return (
+      <div id="App">
+        <h1>REDUX TEST</h1>
+        <p>count: { value }</p>
+        <form onSubmit={ (e) => this.handleSubmit(e) }>
+          <label>
+            add Number: <input type="number" onChange={ (e) => this.handleChange(e) }/>
+          </label>
+          <div>
+            <input type="submit" value="submit"/>
+          </div>
+        </form>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
-const mapStateToProps = (state) => {
-  return {value: state.count.value}
+const mapStateToProps = ( state ) => {
+  return state
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    increment: () => dispatch(increment()),
-    decrement: () => dispatch(decrement()),
+    addNumber: (num) => dispatch(addNumber(num))
   }
 }
 

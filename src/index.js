@@ -2,11 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import reducers from './reducers/'
+import reducer from './reducers/'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import App from './components/App'
 import * as serviceWorker from './serviceWorker'
 
-const store = createStore(reducers)
+const store = createStore(reducer, composeWithDevTools())
+console.log(store.getState())
 
 ReactDOM.render(
   (
