@@ -1,40 +1,52 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Container} from "semantic-ui-react";
-import CharacterList, {Character} from "./CharacterList";
+import {Button, Card, Statistic} from "semantic-ui-react";
 
-const App: React.FC = () => {
-  const characters: Character[] = [
-    {
-      id: 1,
-      name: 'test1',
-      age: 20,
-      height: 160
-    },
-    {
-      id: 2,
-      name: 'test2',
-      age: 22,
-      height: 170
-    },
-    {
-      id: 3,
-      name: 'test3',
-      age: 28,
-      height: 176
-    },
-  ];
+interface AppState {
+  count: number
+}
 
-  return (
-    <Container>
-      <header>
-        <h1>はねバド！　キャラクター一覧</h1>
-        <CharacterList
-          school="ダミーダミー"
-          character={characters}
-        />
-      </header>
-    </Container>
-  );
+class App extends Component<{}, AppState> {
+  state: AppState;
+
+  constructor(props: {}) {
+    super(props);
+    this.state = {count: 0}
+  }
+
+  increment = () => {
+    this.setState(prev => ({
+      count: prev.count + 1
+    }))
+  };
+
+  decrement = () => {
+    this.setState(prev => ({
+      count: prev.count - 1
+    }))
+  };
+
+  render() {
+    return (
+      <Container>
+        <header>
+          <h1>カウンター</h1>
+        </header>
+        <Card>
+          <Statistic className="number-bord">
+            <Statistic.Label>Count</Statistic.Label>
+            <Statistic.Value>{this.state.count}</Statistic.Value>
+          </Statistic>
+          <Card.Content>
+            <div className="ui two buttons">
+              <Button color="red" onClick={() => this.decrement()}>-1</Button>
+              <Button color="blue" onClick={() => this.increment()}>+1</Button>
+            </div>
+          </Card.Content>
+        </Card>
+      </Container>
+    )
+  }
 }
 
 export default App;
