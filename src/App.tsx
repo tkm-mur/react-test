@@ -1,47 +1,58 @@
-import React, {Component} from 'react';
-import {Container} from "semantic-ui-react";
-import {Button, Card, Statistic} from "semantic-ui-react";
+import React, {Component} from "react";
+import {Container, Card, Icon, Button, Statistic} from "semantic-ui-react";
+
+const LIMIT = 10;
 
 interface AppState {
-  count: number
+  timeLeft: number
 }
 
 class App extends Component<{}, AppState> {
-  state: AppState;
+  timer?: number;
 
   constructor(props: {}) {
     super(props);
-    this.state = {count: 0}
+    this.state = {
+      timeLeft: LIMIT
+    }
   }
 
-  increment = () => {
-    this.setState(prev => ({
-      count: prev.count + 1
-    }))
+  componentDidMount() {
+    this.timer = window.setInterval(() => {
+      this.tick();
+    }, 1000)
+  }
+
+  componentDidUpdate() {
+    if (this.state.timeLeft === 0) {
+      this.reset()
+    }
+  }
+
+  tick = () => {
+    this.setState({timeLeft: this.state.timeLeft - 1})
   };
 
-  decrement = () => {
-    this.setState(prev => ({
-      count: prev.count - 1
-    }))
+  reset = () => {
+    this.setState({timeLeft: LIMIT});
   };
 
   render() {
     return (
       <Container>
         <header>
-          <h1>カウンター</h1>
+          <h1>タイマー</h1>
         </header>
         <Card>
-          <Statistic className="number-bord">
-            <Statistic.Label>Count</Statistic.Label>
-            <Statistic.Value>{this.state.count}</Statistic.Value>
+          <Statistic>
+            <Statistic.Label>Time</Statistic.Label>
+            <Statistic.Value>{this.state.timeLeft}</Statistic.Value>
           </Statistic>
           <Card.Content>
-            <div className="ui two buttons">
-              <Button color="red" onClick={() => this.decrement()}>-1</Button>
-              <Button color="blue" onClick={() => this.increment()}>+1</Button>
-            </div>
+            <Button color="red" fluid onClick={() => this.reset()}>
+              <Icon name="redo"/>
+              Reset
+            </Button>
           </Card.Content>
         </Card>
       </Container>
