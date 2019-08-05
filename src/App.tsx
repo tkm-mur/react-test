@@ -1,22 +1,28 @@
-import React, {FC, useState} from "react";
+import React, {FC, useState, useEffect} from "react";
 import {Container} from "semantic-ui-react";
 
 const App: FC<{}> = () => {
-  const [counter, setCounter] = useState(0);
+  const LIMIT_TIME = 5;
+  const [timer, setTimer] = useState(LIMIT_TIME);
 
-  const increment = () => {
-    setCounter(counter + 1);
-  };
+  useEffect(() => {
+    const timerId = window.setInterval(() => {
+      setTimer((prevTIme) => {
+        return prevTIme === 0 ? LIMIT_TIME : prevTIme - 1;
+      });
 
-  const decrement = () => {
-    setCounter(counter - 1);
+      return () => clearInterval(timerId);
+    }, 1000)
+  }, []);
+
+  const reset = () => {
+    setTimer(LIMIT_TIME);
   };
 
   return (
     <Container>
-      <p>Counter: {counter}</p>
-      <button onClick={increment}>+1</button>
-      <button onClick={decrement}>-1</button>
+      <div>{timer}</div>
+      <button onClick={reset}>Reset</button>
     </Container>
   )
 };
