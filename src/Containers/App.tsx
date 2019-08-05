@@ -1,35 +1,18 @@
-import React, {FC, useState, useEffect} from "react";
+import React, {FC} from "react";
+import {Switch, Redirect, Route} from "react-router-dom";
 import {Container} from "semantic-ui-react";
-import Counter from "../Components/App";
 
-const useCounter = (limitSec: number): [number, () => void] => {
-  const [counter, setCounter] = useState(limitSec);
-
-  useEffect(() => {
-    const timerId = window.setInterval(() => {
-      setCounter((prevCounter) => {
-        return prevCounter === 0 ? limitSec : prevCounter - 1;
-      })
-    }, 1000);
-
-    return () => {
-      clearInterval(timerId)
-    };
-  }, []);
-
-  const reset = () => {
-    setCounter(limitSec);
-  };
-
-  return [counter, reset];
-};
+import Home from './Home/Home'
+import Team from "./Team/Team";
 
 const App: FC<{}> = () => {
-  const [counter, reset] = useCounter(5);
-
   return (
     <Container>
-      <Counter counter={counter} reset={reset}/>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/team/:id" component={Team} />
+        <Redirect to="/" />
+      </Switch>
     </Container>
   )
 };
