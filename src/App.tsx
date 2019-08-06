@@ -1,26 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Container, Header} from "semantic-ui-react";
+import Styles from './assets/scss/global.module.scss';
+import Counter from './components/counter/Counter'
+import ColorfulBeads from "./components/colorfulBeads/ColorfuBeads";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <Container className={Styles.container}>
+      <header>
+        <Header as="h1">ビーズカウンター</Header>
       </header>
-    </div>
+
+      <Counter />
+
+      <ColorfulBeads />
+    </Container>
   );
-}
+};
 
 export default App;
