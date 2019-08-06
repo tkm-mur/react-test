@@ -1,29 +1,27 @@
-export enum CounterActionType {
-  INCREMENT = 'COUNTER/INCREMENT',
-  DECREMENT = 'COUNTER/DECREMENT',
-  ADD = 'COUNTER/ADD'
-}
+export const INCREMENT = 'COUNTER/INCREMENT';
+export const DECREMENT = 'COUNTER/DECREMENT';
+export const ADD = 'COUNTER/ADD';
 
-export type CounterAction = {
-  type: string,
-  amount?: number
-}
-
-export const increment = ():CounterAction => {
+export const increment = () => {
   return {
-    type: CounterActionType.INCREMENT
-  }
+    type: INCREMENT
+  } as const;
 };
 
-export const decrement = ():CounterAction => {
+export const decrement = () => {
   return {
-    type: CounterActionType.DECREMENT
-  }
+    type: DECREMENT
+  } as const;
 };
 
-export const add = (value: number):CounterAction => {
+export const add = (value: number) => {
   return {
-    type: CounterActionType.ADD,
-    amount: value
-  }
+    type: ADD,
+    payload: {amount: value}
+  } as const;
 };
+
+export type CounterAction =
+  | ReturnType<typeof add>
+  | ReturnType<typeof decrement>
+  | ReturnType<typeof increment>;
