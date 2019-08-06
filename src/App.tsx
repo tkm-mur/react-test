@@ -1,8 +1,8 @@
 import React from 'react';
 import {Container, Header} from "semantic-ui-react";
 import Styles from './assets/scss/global.module.scss';
-import Counter from './components/counter/Counter'
-import ColorfulBeads from "./components/colorfulBeads/ColorfuBeads";
+import Counter from './containers/counter/counter'
+import ColorfulBeads from "./containers/colorfulBeads/colorfulBeads";
 
 const App: React.FC = () => {
   return (

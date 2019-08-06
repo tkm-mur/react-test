@@ -1,17 +1,10 @@
 import React, {FC} from "react";
-import {connect} from 'react-redux'
-import {increment, decrement, add} from "../../actions/counter";
-import {CounterState} from "../../reducers/counter";
 
 export type CounterProps = {
   count: number,
   add: (amount: number) => void,
   decrement: () => void,
   increment: () => void
-}
-
-interface StateProps {
-  count: number;
 }
 
 const Counter: FC<CounterProps> = props => {
@@ -27,12 +20,4 @@ const Counter: FC<CounterProps> = props => {
   )
 };
 
-const mapStateToProps = (state: {counterReducer: CounterState}): StateProps => {
-  return {
-    count: state.counterReducer.count
-  }
-};
-
-const mapDispatchToProps = { increment, decrement, add };
-
-export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+export default Counter;
