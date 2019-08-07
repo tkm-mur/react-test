@@ -1,13 +1,33 @@
-import React from 'react';
-import {Container} from "semantic-ui-react";
-import styles from './assets/scss/App.module.scss';
+import React from 'react'
+import Helmet from 'react-helmet'
+import { Switch, Route, Redirect } from 'react-router-dom'
+import styles from './assets/scss/App.module.scss'
+
+import Home from './components/Home'
+import Members from './containers/Members/Members'
+
+const title = 'いろんな会社のメンバー'
 
 const App: React.FC = () => {
   return (
-    <Container className={styles.app}>
-      <h1>TEST</h1>
-    </Container>
-  );
-};
+    <>
+      <Helmet htmlAttributes={{ lang: 'ja' }}>
+        <title>{title}</title>
+      </Helmet>
 
-export default App;
+      <div className={styles.container}>
+        <header className={styles['App-header']}>
+          <h1>{title}</h1>
+        </header>
+
+        <Switch>
+          <Route exact path="/" component={Home}/>
+          <Route exact path="/:companyName/members" component={Members}/>
+          <Redirect to="/"/>
+        </Switch>
+      </div>
+    </>
+  )
+}
+
+export default App
