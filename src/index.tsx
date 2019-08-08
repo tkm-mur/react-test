@@ -4,17 +4,13 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import createSagaMiddleware from 'redux-saga'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import reducers from './reducer'
-import rootSaga from './sagas/github'
+import reducers from './reducers'
+import rootSaga from './sagas/index'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
-import 'semantic-ui-css/semantic.min.css'
 
-const sagaMiddleware = createSagaMiddleware()
-const store = createStore(
-  reducers,
-  composeWithDevTools(applyMiddleware(sagaMiddleware)),
-)
+const sagaMidleware = createSagaMiddleware()
+const store = createStore(reducers, composeWithDevTools(applyMiddleware(sagaMidleware)))
 
 ReactDOM.render(
   <Provider store={store}>
@@ -25,4 +21,4 @@ ReactDOM.render(
   document.getElementById('root'),
 )
 
-sagaMiddleware.run(rootSaga)
+sagaMidleware.run(rootSaga)
