@@ -15,6 +15,8 @@ function* runGetMembers(action: ReturnType<typeof getMemberStart>) {
     const api = getMembersFactory();
     const users = yield call(api, companyName);
 
+    console.log(users)
+
     yield put(getMemberSucceed({ companyName }, { users }));
   } catch (error) {
     yield put(getMemberFail({ companyName }, error));

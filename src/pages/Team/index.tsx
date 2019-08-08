@@ -18,17 +18,31 @@ type TeamProps = TeamStateProps &
   TeamDispatchProps &
   RouteComponentProps<{ teamName: string }>;
 
+// eslint-disable-next-line no-shadow
 const Team: FC<TeamProps> = ({ users, isLoading, getMemberStart, match }) => {
   const { teamName } = match.params;
-  const test = getMemberStart;
 
   useEffect(() => {
-    test(teamName);
+    getMemberStart(teamName);
   }, []);
 
   return (
     <div>
       <h1>Team</h1>
+      {isLoading ? (
+        <p>読み込み中....</p>
+      ) : (
+        <ul>
+          {users.map(user => (
+            <li key={user.id}>
+              {/* eslint-disable-next-line react/jsx-no-target-blank */}
+              <a href={user.html_url} target="_blank">
+                {user.login}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
