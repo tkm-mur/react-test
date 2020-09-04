@@ -18,7 +18,7 @@
     "eslint-plugin-jest": "^22.15.0",
     "eslint-plugin-prefer-arrow": "^1.1.5",
     "eslint-plugin-prettier": "^3.1.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "prettier": "^1.18.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
